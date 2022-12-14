@@ -23,7 +23,6 @@ public class AddressSys implements System<Company> {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-
             preparedStatement.setInt(1, company.getCompany_id());
             preparedStatement.setString(2, company.getPoc_name());
             preparedStatement.setString(3, company.getAddress());
