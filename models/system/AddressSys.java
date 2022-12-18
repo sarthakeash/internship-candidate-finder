@@ -40,8 +40,8 @@ public class AddressSys implements System<Company> {
 
     @Override
     public void update(Company company) throws SQLException {
-        String SQL = String.format("UPDATE \"%s\" SET cep = ?, logradouro = ?, bairro = ?, municipio = ?, "
-                + "sigla_da_unidade_federativa = ? where id = ?", getNamesTable());
+        String SQL = String.format("UPDATE \"%s\" SET poc_name = ?, field = ?, companyName = ?, address = ?, "
+                + "where company_id = ?", getNamesTable());
 
         PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
@@ -73,23 +73,22 @@ public class AddressSys implements System<Company> {
         if (resultSet.first()) {
             company = new Company();
 
-            company.setCompany_id(resultSet.getInt("id"));
-            //String cep = resultSet.getString("cep");
-            company.setPoc_name(resultSet.getString("cep"));
-            //String logradouro = resultSet.getString("logradouro");
-            company.setAddress(resultSet.getString("logradouro"));
-            //String bairro = resultSet.getString("bairro");
-            company.setField(resultSet.getString("bairro"));
-            //String municipio = resultSet.getString("municipio");
-            company.setCompanyName(resultSet.getString("municipio"));
-            //FederativeUnit uf = FederativeUnit.fromInitials(resultSet.getString("sigla_da_unidade_federativa"));
+            company.setCompany_id(resultSet.getInt("company_id"));
+
+            company.setPoc_name(resultSet.getString("poc_name"));
+            company.setAddress(resultSet.getString("address"));
+
+            company.setField(resultSet.getString("field"));
+
+            company.setCompanyName(resultSet.getString("companyName"));
+
         }
 
         resultSet.close();
         preparedStatement.close();
 
         if (company == null) {
-            throw new NotFoundException("Não foi encontrada nenhum Endereço com o id " + id + " .");
+            throw new NotFoundException("No address found with id" + id + " .");
         }
 
         return company;

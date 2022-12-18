@@ -20,34 +20,34 @@ public class CompanyReg {
         this.addressSys = new AddressSys();
     }
 
-    public void inseriraddress(Company company) throws IllegalArgumentException,
+    public void insertaddress(Company company) throws IllegalArgumentException,
             InvalidInputFromUserException, SQLException {
 
-        validarInsercaoaddress(company);
+        validateRecord(company);
 
         addressSys.insertAdd(company);
 
         Company.numberOfCreatedObjects++;
     }
 
-    public void validarInsercaoaddress(Company company) throws IllegalArgumentException,
+    public void validateRecord(Company company) throws IllegalArgumentException,
             InvalidInputFromUserException {
 
         if (company == null) {
-            throw new IllegalArgumentException("Tentativa de inserir um address nulo.");
+            throw new IllegalArgumentException("Attempt to enter a null address");
         }
     }
 
     public boolean contains(int id) throws Exception {
         try {
-            buscaraddressPorId(id);
+            fetchAddress(id);
             return true;
         } catch (NotFoundException ex) {
             return false;
         }
     }
 
-    public Company buscaraddressPorId(int id) throws NotFoundException, Exception {
+    public Company fetchAddress(int id) throws NotFoundException, Exception {
         Company company = addressSys.search(id);
 
         return company;

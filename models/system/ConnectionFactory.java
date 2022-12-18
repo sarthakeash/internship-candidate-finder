@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public static final String DATABASE = "test_database";
     public static final String HOST = "localhost";
-    public static final String USER = "karlos";
+    public static final String USER = "ooadProject";
     public static final String PASSWORD = "123456789";
 
     public static final String URL = String.format("jdbc:postgresql://%s/%s", HOST, DATABASE);

@@ -32,63 +32,59 @@ public class UniversityReg {
         return instance;
     }
 
-    /*public UniversityService() throws Exception {
-        this.universitySystem = new UniversityDAO();
-        this.addressDAO = new addressDAO();
-    }*/
+
     public void insertUniversity(University university, Company company) throws InvalidParameterException,
             InvalidInputFromUserException, Exception {
 
-        validarInsercaoUniversity(university);
+        validateInsertedUniversity(university);
 
         addressSys.insertAdd(company);
 
         universitySystem.insertAdd(university);
 
-        //address.numberOfCreatedObjects++;
-        //University.numberOfCreatedObjects++;
     }
 
-    public void validarInsercaoUniversity(University university) throws InvalidParameterException,
+    public void validateInsertedUniversity(University university) throws InvalidParameterException,
             InvalidInputFromUserException, IllegalArgumentException, Exception {
 
-        if (universityENula(university)) {
-            throw new InvalidParameterException("Tentativa de inserir uma University nula.");
+        if (nullUniv(university)) {
+            throw new InvalidParameterException("Attempt to enter a null University.");
         }
 
         if (university.getUniversity_id() <= 0) {
-            throw new InvalidInputFromUserException("O id da University deve ser maior do que 0.");
+            throw new InvalidInputFromUserException("\n" +
+                    "The University id must be greater than 0.");
         }
 
         if (university.getName() == null || university.getName().isBlank()) {
-            throw new InvalidInputFromUserException("O name da University é invalido.");
+            throw new InvalidInputFromUserException("\n" +
+                    "The University name is invalid");
         }
 
         if (university.getInitials() == null || university.getInitials().isBlank()) {
-            throw new InvalidInputFromUserException("A initials da University é invalida.");
+            throw new InvalidInputFromUserException("University initials are invalid.");
         }
 
         if (university.getCnpj() == null || university.getCnpj().isBlank()) {
-            throw new InvalidInputFromUserException("O cnpj da University é invalido.");
+            throw new InvalidInputFromUserException("The University's cnpj is invalid.");
         }
 
         if (university.getTelephone() == null || university.getTelephone().isBlank()) {
-            throw new InvalidInputFromUserException("O telephone da University é invalido.");
+            throw new InvalidInputFromUserException("The University phone number is invalid.");
         }
 
         if (university.getAddress() == null) {
-            throw new InvalidInputFromUserException("O address da University é invalido.");
+            throw new InvalidInputFromUserException("The University address is invalid.");
         }
 
         if (university.getAddress() == null) {
-            throw new InvalidInputFromUserException("A initials da UF digitada é inválida.");
+            throw new InvalidInputFromUserException("The UF initials entered is invalid.");
         }
 
         try {
-            buscarUniversityPorId(university.getUniversity_id());
+            getUnivById(university.getUniversity_id());
 
         } catch (NotFoundException ex) {
-            // Nao faz nada, ja que a `university` nao existe no banco de dados.
         }
 
         if (contains(university.getUniversity_id())) {
@@ -99,50 +95,50 @@ public class UniversityReg {
 
     public boolean contains(int id) throws Exception {
         try {
-            buscarUniversityPorId(id);
+            getUnivById(id);
             return true;
         } catch (NotFoundException ex) {
             return false;
         }
     }
 
-    public University buscarUniversityPorId(int id) throws NotFoundException, Exception {
+    public University getUnivById(int id) throws NotFoundException, Exception {
         University university = universitySystem.search(id);
 
         return university;
     }
 
-    public List<University> buscarUniversityPorName(String name) throws Exception, NotFoundException {
-        List<University> universitysBuscadas = new ArrayList<>();
+    public List<University> searchUnivByName(String name) throws Exception, NotFoundException {
+        List<University> universitySearch = new ArrayList<>();
 
         if (name.isBlank()) {
-            return buscarTodasUniversitys();
+            return searchAllUniversitys();
         }
 
-        universitysBuscadas = universitySystem.buscarPorName(name);
+        universitySearch = universitySystem.searchbyName(name);
 
-        if (universitysBuscadas.isEmpty()) {
-            throw new NotFoundException("Não foi encontrada nenhuma University.");
+        if (universitySearch.isEmpty()) {
+            throw new NotFoundException("No University found.");
         }
 
-        return universitysBuscadas;
+        return universitySearch;
     }
 
-    public List<University> buscarTodasUniversitys() throws NotFoundException, Exception {
-        List<University> todasUniversitys;
+    public List<University> searchAllUniversitys() throws NotFoundException, Exception {
+        List<University> allUniversities;
 
-        todasUniversitys = universitySystem.searchAll();
+        allUniversities = universitySystem.searchAll();
 
-        if (todasUniversitys.isEmpty()) {
-            throw new NotFoundException("Não há nenhuma University cadastrada.");
+        if (allUniversities.isEmpty()) {
+            throw new NotFoundException("There is no University registered.");
         }
 
-        return todasUniversitys;
+        return allUniversities;
     }
 
     public void updateUniversity(University university) throws IllegalArgumentException, Exception {
         if (!contains(university.getUniversity_id())) {
-            throw new IllegalArgumentException("Não existe nenhuma University com o id "
+            throw new IllegalArgumentException("There is no University with the id"
                     + university.getUniversity_id());
         }
 
@@ -150,13 +146,13 @@ public class UniversityReg {
         universitySystem.update(university);
     }
 
-    public void removerUniversityPorId(int id) throws IllegalArgumentException, Exception {
+    public void removeUnivById(int id) throws IllegalArgumentException, Exception {
         try {
-            University universityASerRemovida = buscarUniversityPorId(id);
-            Company companyASerRemovido = addressSys.search(universityASerRemovida.getUniversity_id());
+            University universityRemoved = getUnivById(id);
+            Company companyRemoved = addressSys.search(universityRemoved.getUniversity_id());
 
             universitySystem.remover(id);
-            addressSys.remover(companyASerRemovido.getCompany_id());
+            addressSys.remover(companyRemoved.getCompany_id());
 
         } catch (Exception ex) {
             throw ex;
@@ -164,7 +160,7 @@ public class UniversityReg {
 
     }
 
-    public boolean universityENula(University university) {
+    public boolean nullUniv(University university) {
         return university == null;
     }
 }

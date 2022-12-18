@@ -88,8 +88,8 @@ public class University implements Addressable {
 
     public void addCourse(Course course) {
         if (courses.contains(course)) {
-            throw new IllegalArgumentException("Tentativa de adicionar um course ja existente na"
-                    + "lista de courses.");
+            throw new IllegalArgumentException("Attempting to add an existing course to the\n"
+                    + "course list.");
         }
 
         courses.add(course);
@@ -97,7 +97,7 @@ public class University implements Addressable {
 
     @Override
     public String toString() {
-        return String.format("%s - %s.\nCNPJ: %s.\nTelephone: %s.\nEndereço: %s\nNúmero de courses: %d",
+        return String.format("%s - %s.\nCNPJ: %s.\nTelephone: %s.\nAddress: %s\nNumber of courses: %d",
                 name, initials, cnpj, telephone, company, courses.size());
     }
     public void addStudent(Student s){

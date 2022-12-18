@@ -6,39 +6,39 @@ public class Student implements Addressable {
 
     public static int numberOfCreatedObjects = 0;
     private int id;
-    private String codigoDeMatricula;
+    private String regCode;
     private String name;
-    private Date dataDeNascimento;
+    private Date dob;
     private String email;
     private String telephone;
-    private Date dataDeMatricula;
+    private Date enrollmentDate;
     private Company company;
 
     public Student() {
 
     }
 
-    public Student(String codigoDeMatricula, String name, Date dataDeNascimento, String email,
-            String telephone, Date dataDeMatricula, Company companyDeMatricula) {
+    public Student(String regCode, String name, Date dob, String email,
+                   String telephone, Date enrollmentDate, Company company) {
 
         Student.numberOfCreatedObjects++;
 
         this.id = numberOfCreatedObjects;
-        this.codigoDeMatricula = codigoDeMatricula;
+        this.regCode = regCode;
         this.name = name;
-        this.dataDeNascimento = dataDeNascimento;
+        this.dob = dob;
         this.email = email;
         this.telephone = telephone;
-        this.dataDeMatricula = dataDeMatricula;
-        this.company = companyDeMatricula;
+        this.enrollmentDate = enrollmentDate;
+        this.company = company;
     }
 
-    public String getCodigoDeMatricula() {
-        return codigoDeMatricula;
+    public String getRegCode() {
+        return regCode;
     }
 
-    public void setCodigoDeMatricula(String codigoDeMatricula) {
-        this.codigoDeMatricula = codigoDeMatricula;
+    public void setRegCode(String regCode) {
+        this.regCode = regCode;
     }
 
     public String getName() {
@@ -49,12 +49,12 @@ public class Student implements Addressable {
         this.name = name;
     }
 
-    public Date getDataDeNascimento() {
-        return dataDeNascimento;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
-        this.dataDeNascimento = dataDeNascimento;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public String getEmail() {
@@ -73,12 +73,12 @@ public class Student implements Addressable {
         this.telephone = telephone;
     }
 
-    public Date getDataDeMatricula() {
-        return dataDeMatricula;
+    public Date getEnrollmentDate() {
+        return enrollmentDate;
     }
 
-    public void setDataDeMatricula(Date dataDeMatricula) {
-        this.dataDeMatricula = dataDeMatricula;
+    public void setEnrollmentDate(Date enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
     }
 
     @Override
@@ -94,12 +94,12 @@ public class Student implements Addressable {
     @Override
     public String toString() {
         return "student{"
-                + "codigoDeMatricula='" + codigoDeMatricula + '\''
+                + "regCode='" + regCode + '\''
                 + ", name='" + name + '\''
-                + ", dataDeNascimento=" + dataDeNascimento
+                + ", dob=" + dob
                 + ", email='" + email + '\''
                 + ", telephone='" + telephone + '\''
-                + ", dataDeMatricula=" + dataDeMatricula
+                + ", enrollmentDate=" + enrollmentDate
                 + ", address=" + company
                 + '}';
     }

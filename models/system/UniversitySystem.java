@@ -76,15 +76,10 @@ public class UniversitySystem implements System<University> {
             university = new University();
 
             university.setUniversity_id(resultSet.getInt("id"));
-            //String name = resultSet.getString("name");
             university.setName(resultSet.getString("name"));
-            //String initials = resultSet.getString("initials");
             university.setInitials(resultSet.getString("initials"));
-            //String cnpj = resultSet.getString("cnpj");
             university.setCnpj(resultSet.getString("cnpj"));
-            //String telephone = resultSet.getString("telephone");
             university.setTelephone(resultSet.getString("telephone"));
-            //address address = addressDAO.buscar(resultSet.getInt("address_id"));
             university.setAddress(addressSys.search(resultSet.getInt("address_id")));
 
         }
@@ -93,7 +88,7 @@ public class UniversitySystem implements System<University> {
         preparedStatement.close();
 
         if (university == null) {
-            throw new NotFoundException("Não foi encontrada nenhuma University com o id " + id + " .");
+            throw new NotFoundException("\n" + "No University was found with the id " + id + " .");
         }
 
         return university;
@@ -111,17 +106,12 @@ public class UniversitySystem implements System<University> {
 
         while (resultSet.next()) {
             university = new University();
-
             university.setUniversity_id(resultSet.getInt("id"));
-            //String name = resultSet.getString("name");
             university.setName(resultSet.getString("name"));
-            //String initials = resultSet.getString("initials");
             university.setInitials(resultSet.getString("initials"));
-            //String cnpj = resultSet.getString("cnpj");
             university.setCnpj(resultSet.getString("cnpj"));
-            //String telephone = resultSet.getString("telephone");
             university.setTelephone(resultSet.getString("telephone"));
-            //address = addressDAO.buscar(resultSet.getInt("address_id"));
+
             university.setAddress(addressSys.search(resultSet.getInt("address_id")));
 
             universitys.add(university);
@@ -161,17 +151,11 @@ public class UniversitySystem implements System<University> {
         while (resultSet.next()) {
             university = new University();
             university.setUniversity_id(resultSet.getInt("id"));
-            //String nameUniversity = resultSet.getString("name");
             university.setName(resultSet.getString("name"));
-            //String initials = resultSet.getString("initials");
             university.setInitials(resultSet.getString("initials"));
-            //String cnpj = resultSet.getString("cnpj");
             university.setCnpj(resultSet.getString("cnpj"));
-            //String telephone = resultSet.getString("telephone");
             university.setTelephone(resultSet.getString("telephone"));
-            //address address = addressDAO.buscar(resultSet.getInt("address_id"));
             university.setAddress(addressSys.search(resultSet.getInt("address_id")));
-
             universitys.add(university);
         }
 
